@@ -6,45 +6,45 @@ using System.Threading.Tasks;
 
 namespace Zaverecny_projekt
 {
-    internal class bet: IBaseClass
+    internal class Bet : IBaseClass
     {
         private int id;
-        private DateTime date_of_bet;
+        private DateTime dateOfBet;
         private int amount;
         private bool win;
         private int result;
-        private int player_id;
-
-
-        public bet()
-        {
-        }
-
-        public bet(int id, DateTime date_of_bet, int amount, bool win, int result, int player_id)
-        {
-            this.id = id;
-            this.date_of_bet = date_of_bet;
-            this.amount = amount;
-            this.win = win;
-            this.result = result;
-            this.player_id = player_id;
-        }
-
-        public bet(DateTime date_of_bet, int amount, bool win, int result, int player_id)
-        {
-            this.id = 0;
-            this.date_of_bet = date_of_bet;
-            this.amount = amount;
-            this.win = win;
-            this.result = result;
-            this.player_id = player_id;
-        }
+        private int playerId;
 
         public int Id { get => id; set => id = value; }
-        public DateTime Date_of_bet { get => date_of_bet; set => date_of_bet = value; }
+        public DateTime DateOfBet { get => dateOfBet; set => dateOfBet = value; }
         public int Amount { get => amount; set => amount = value; }
         public bool Win { get => win; set => win = value; }
         public int Result { get => result; set => result = value; }
-        public int Player_id { get => player_id; set => player_id = value; }
+        public int PlayerId { get => playerId; set => playerId = value; }
+
+        public Bet(int id, DateTime dateOfBet, int amount, bool win, int result, int playerId)
+        {
+            this.id = id;
+            this.DateOfBet = dateOfBet;
+            this.Amount = amount;
+            this.Win = win;
+            this.Result = result;
+            this.PlayerId = playerId;
+        }
+
+        public Bet(DateTime dateOfBet, int amount, bool win, int result, int playerId)
+        {
+            this.id = 0;
+            this.DateOfBet = dateOfBet;
+            this.Amount = amount;
+            this.Win = win;
+            this.Result = result;
+            this.PlayerId = playerId;
+        }
+
+        public override string ToString()
+        {
+            return $"{id}. Date: {DateOfBet}, Amount: {Amount}, Win: {Win}, Result: {Result}, Player ID: {PlayerId}";
+        }
     }
 }
