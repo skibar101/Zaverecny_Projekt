@@ -43,6 +43,7 @@
             textBox5 = new TextBox();
             label7 = new Label();
             textBox6 = new TextBox();
+            label8 = new Label();
             SuspendLayout();
             // 
             // button1
@@ -198,11 +199,23 @@
             textBox6.Size = new Size(451, 41);
             textBox6.TabIndex = 21;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(12, 22);
+            label8.Name = "label8";
+            label8.Size = new Size(68, 25);
+            label8.TabIndex = 23;
+            label8.Text = "BACK";
+            label8.Click += label8_Click;
+            // 
             // Form4
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(577, 776);
+            Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(textBox6);
             Controls.Add(label6);
@@ -240,5 +253,6 @@
         private TextBox textBox5;
         private Label label7;
         private TextBox textBox6;
+        private Label label8;
     }
 }

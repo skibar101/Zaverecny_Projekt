@@ -48,6 +48,7 @@
             button8 = new Button();
             button9 = new Button();
             label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -258,6 +259,19 @@
             label3.TabIndex = 18;
             label3.Text = "Balance: €";
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(13, 21);
+            label4.Name = "label4";
+            label4.Size = new Size(97, 36);
+            label4.TabIndex = 19;
+            label4.Text = "BACK";
+            label4.Click += label4_Click;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -265,6 +279,7 @@
             BackColor = SystemColors.ActiveCaption;
             BackgroundImage = Properties.Resources.background;
             ClientSize = new Size(944, 782);
+            Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(button9);
             Controls.Add(button8);
@@ -316,5 +331,6 @@
         private Button button8;
         private Button button9;
         private Label label3;
+        private Label label4;
     }
 }

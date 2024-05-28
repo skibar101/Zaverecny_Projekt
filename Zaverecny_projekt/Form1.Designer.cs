@@ -38,6 +38,7 @@
             textBox1 = new TextBox();
             label2 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -139,6 +140,19 @@
             // 
             timer1.Tick += timer1_Tick;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = SystemColors.ButtonHighlight;
+            label3.Location = new Point(20, 36);
+            label3.Name = "label3";
+            label3.Size = new Size(91, 32);
+            label3.TabIndex = 14;
+            label3.Text = "BACK";
+            label3.Click += label3_Click_1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -146,6 +160,7 @@
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.background2;
             ClientSize = new Size(740, 683);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(textBox1);
             Controls.Add(button1);
@@ -176,5 +191,6 @@
         private TextBox textBox1;
         private Label label2;
         private System.Windows.Forms.Timer timer1;
+        private Label label3;
     }
 }

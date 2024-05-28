@@ -29,7 +29,7 @@ namespace Zaverecny_projekt
         private void ChangeBet()
         {
             textBox1.Enabled = true;
-           
+
         }
 
         private void CheckWin()
@@ -196,7 +196,7 @@ namespace Zaverecny_projekt
                         label1.Text = "Balance: €" + balance.ToString();
                         timer1.Enabled = true;
                         textBox1.Enabled = false;
-                        
+
                     }
                     else
                     {
@@ -304,6 +304,13 @@ namespace Zaverecny_projekt
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form5 form5 = new Form5();
+            form5.Show();
         }
     }
 }

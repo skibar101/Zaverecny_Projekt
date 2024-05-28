@@ -10,24 +10,25 @@ using System.Windows.Forms;
 
 namespace Zaverecny_projekt
 {
-    public partial class Form4 : Form
+    public partial class Form5 : Form
     {
-        public Form4()
+        public Form5()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form3 form3 = new Form3();
-            form3.Show();
+            Form1 form1 = new Form1();
+            form1.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form2 form2 = new Form2();
+            form2.Show();
         }
     }
 }
-

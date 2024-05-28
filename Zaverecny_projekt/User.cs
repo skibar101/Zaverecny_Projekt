@@ -13,6 +13,9 @@ namespace Zaverecny_projekt
         private string firstName;
         private string lastName;
         private string email;
+
+           
+
         private string password;
         private int money;
         private bool ban;
