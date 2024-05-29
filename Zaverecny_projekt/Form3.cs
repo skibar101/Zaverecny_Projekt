@@ -50,38 +50,24 @@ namespace Zaverecny_projekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                connection.Open();
-                SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM player WHERE mail = @mail AND passw = @passw", connection);
-                sda.SelectCommand.Parameters.AddWithValue("@mail", textBox1.Text);
-                sda.SelectCommand.Parameters.AddWithValue("@passw", textBox2.Text);
+            UserDAO dao = new();
 
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
+            string email = textBox1.Text;
+            string pass = textBox2.Text;
 
-                if (dt.Rows[0][0].ToString() == "1")
-                {
-                    Form5 form5 = new Form5();
-                    form5.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Wrong email or password");
-                }
-            }
-            catch (Exception ex)
+            User? user = dao.GetByEmailAndPassword(email, pass);
+
+            if (user == null)
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                MessageBox.Show("Failed to login");
+                return;
             }
-            finally
-            {
-                if (connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
+
+            MessageBox.Show("Successfully logged in");
+            Game.loggedInUser = user;
+            this.Hide();
+            Form5 form5 = new Form5();
+            form5.Show();
         }
     }
 }
