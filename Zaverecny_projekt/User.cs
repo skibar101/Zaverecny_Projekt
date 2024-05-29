@@ -13,9 +13,6 @@ namespace Zaverecny_projekt
         private string firstName;
         private string lastName;
         private string email;
-
-           
-
         private string password;
         private int money;
         private bool ban;
@@ -29,6 +26,16 @@ namespace Zaverecny_projekt
             this.password = password;
             this.money = money;
             this.ban = ban;
+        }
+
+        public User(string firstName, string lastName, string email, string password)
+        {
+           
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.password = password;
+            
         }
 
         public int Id { get => id; set => id = value; }

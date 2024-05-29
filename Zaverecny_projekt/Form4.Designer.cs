@@ -19,7 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
+       
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -41,8 +41,6 @@
             textBox4 = new TextBox();
             label6 = new Label();
             textBox5 = new TextBox();
-            label7 = new Label();
-            textBox6 = new TextBox();
             label8 = new Label();
             SuspendLayout();
             // 
@@ -57,6 +55,7 @@
             button1.TabIndex = 14;
             button1.Text = "Create an Account";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += Register;
             // 
             // label3
             // 
@@ -179,26 +178,6 @@
             textBox5.Size = new Size(451, 41);
             textBox5.TabIndex = 19;
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.ForeColor = Color.Black;
-            label7.Location = new Point(62, 547);
-            label7.Name = "label7";
-            label7.Size = new Size(217, 25);
-            label7.TabIndex = 22;
-            label7.Text = "Birth Certificate Number";
-            // 
-            // textBox6
-            // 
-            textBox6.BackColor = Color.Gainsboro;
-            textBox6.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox6.Location = new Point(62, 575);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(451, 41);
-            textBox6.TabIndex = 21;
-            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -214,10 +193,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(577, 776);
+            ClientSize = new Size(577, 640);
             Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(textBox6);
             Controls.Add(label6);
             Controls.Add(textBox5);
             Controls.Add(label5);
@@ -251,8 +228,8 @@
         private TextBox textBox4;
         private Label label6;
         private TextBox textBox5;
-        private Label label7;
-        private TextBox textBox6;
         private Label label8;
+
+       
     }
 }
