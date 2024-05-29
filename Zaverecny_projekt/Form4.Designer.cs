@@ -19,7 +19,7 @@
             }
             base.Dispose(disposing);
         }
-       
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -49,7 +49,7 @@
             button1.BackColor = Color.Gainsboro;
             button1.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
             button1.ForeColor = Color.Black;
-            button1.Location = new Point(155, 667);
+            button1.Location = new Point(144, 570);
             button1.Name = "button1";
             button1.Size = new Size(273, 43);
             button1.TabIndex = 14;
@@ -193,7 +193,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(577, 640);
+            ClientSize = new Size(577, 664);
             Controls.Add(label8);
             Controls.Add(label6);
             Controls.Add(textBox5);
@@ -230,6 +230,6 @@
         private TextBox textBox5;
         private Label label8;
 
-       
+
     }
 }

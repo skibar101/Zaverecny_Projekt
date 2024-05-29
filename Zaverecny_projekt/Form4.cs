@@ -48,7 +48,7 @@ namespace Zaverecny_projekt
             string repeatPassword = textBox3.Text;
             string firstName = textBox4.Text;
             string lastName = textBox5.Text;
-          //  string birthCertificateNumber = textBox6.Text;
+            //  string birthCertificateNumber = textBox6.Text;
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) ||
                 string.IsNullOrWhiteSpace(repeatPassword) || string.IsNullOrWhiteSpace(firstName) ||
