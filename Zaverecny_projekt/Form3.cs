@@ -14,6 +14,7 @@ namespace Zaverecny_projekt
 {
     public partial class Form3 : Form
     {
+        SqlConnection connection = Singleton.GetInstance();
         public Form3()
         {
             InitializeComponent();
@@ -47,27 +48,40 @@ namespace Zaverecny_projekt
         }
 
 
-        SqlConnection connection = Singleton.GetInstance();
         private void button1_Click(object sender, EventArgs e)
         {
-            connection.Open();
-            SqlDataAdapter sda = new SqlDataAdapter("select count(*) from player where mail = '" + textBox1.Text + "' and passw = '" + textBox2.Text + "", connection);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-
-            if (dt.Rows[0][0].ToString()== "1")
+            try
             {
-                Form5 form5 = new Form5();
-                form5.Show();
-                this.Hide();
-                connection.Close();
-            }
-            else
-            {
-                MessageBox.Show("Wrong email or password");
+                connection.Open();
+                SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM player WHERE mail = @mail AND passw = @passw", connection);
+                sda.SelectCommand.Parameters.AddWithValue("@mail", textBox1.Text);
+                sda.SelectCommand.Parameters.AddWithValue("@passw", textBox2.Text);
 
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                if (dt.Rows[0][0].ToString() == "1")
+                {
+                    Form5 form5 = new Form5();
+                    form5.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Wrong email or password");
+                }
             }
-            connection.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }
