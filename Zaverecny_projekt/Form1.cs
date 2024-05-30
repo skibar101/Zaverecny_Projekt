@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.ComponentModel;
 using System.Drawing.Text;
 using System.Net.Http.Headers;
@@ -17,13 +17,31 @@ namespace Zaverecny_projekt
         int a, b, c, d, move;
 
 
-        private int balance = 0;
+        private int balance = Game.loggedInUser.Money;
 
 
         private void AddMoney(int amount)
         {
+            BetDAO betDAO = new();
+
+            Bet bet = new Bet(DateTime.Now, amount, true, 0, Game.loggedInUser.Id);
+            Game.loggedInUser.Money += amount;
             balance += amount;
-            label1.Text = "Balance: €" + balance.ToString();
+            label1.Text = "Balance: â‚¬" + balance.ToString();
+
+            betDAO.Save(bet);
+        }
+
+        private void RemoveMoney(int amount)
+        {
+            BetDAO betDAO = new();
+
+            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id);
+            Game.loggedInUser.Money -= amount;
+            balance -= amount;
+            label1.Text = "Balance: â‚¬" + balance.ToString();
+
+            betDAO.Save(bet);
         }
 
         private void ChangeBet()
@@ -151,7 +169,7 @@ namespace Zaverecny_projekt
 
             else
             {
-
+                RemoveMoney(Convert.ToInt32(textBox1.Text));
                 MessageBox.Show("Sorry, you didn't win this time");
 
             }
@@ -159,8 +177,8 @@ namespace Zaverecny_projekt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            balance = 500;
-            label1.Text = "Balance: €" + balance.ToString();
+            balance = Game.loggedInUser.Money;
+            label1.Text = "Balance: â‚¬" + balance.ToString();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -192,8 +210,7 @@ namespace Zaverecny_projekt
                 {
                     if (betAmount <= balance && betAmount > 0)
                     {
-                        balance -= betAmount;
-                        label1.Text = "Balance: €" + balance.ToString();
+                        label1.Text = "Balance: â‚¬" + balance.ToString();
                         timer1.Enabled = true;
                         textBox1.Enabled = false;
 

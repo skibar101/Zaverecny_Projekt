@@ -129,7 +129,7 @@ namespace Zaverecny_projekt
             User? user = null;
             SqlConnection connection = Singleton.GetInstance();
 
-            using (SqlCommand command = new SqlCommand("SELECT * FROM player WHERE email = @Email AND passw = @Password", connection))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM player WHERE email = @Email AND passw = @Password COLLATE Latin1_General_CS_AS", connection))
             {
                 command.Parameters.Add(new SqlParameter("@Email", email));
                 command.Parameters.Add(new SqlParameter("@Password", password));

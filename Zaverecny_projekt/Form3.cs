@@ -54,6 +54,8 @@ namespace Zaverecny_projekt
 
             string email = textBox1.Text;
             string pass = textBox2.Text;
+            textBox1.Clear();
+            textBox2.Clear();
 
             User? user = dao.GetByEmailAndPassword(email, pass);
 
@@ -62,6 +64,13 @@ namespace Zaverecny_projekt
                 MessageBox.Show("Failed to login");
                 return;
             }
+
+            if (user.Ban)
+            {
+                MessageBox.Show("You are banned from betting!");
+                return;
+            }
+
 
             MessageBox.Show("Successfully logged in");
             Game.loggedInUser = user;

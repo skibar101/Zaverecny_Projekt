@@ -20,13 +20,12 @@ namespace Zaverecny_projekt
             InitializeComponent();
         }
 
-
         Image[] diceImages;
         int[] dice;
         Random rn;
         int rollCount;
         const int maxRollCount = 20;
-        private int balance = 0;
+        private int balance = Game.loggedInUser.Money;
 
         private int multiplier = 0;
         private int betAmount;
@@ -37,7 +36,6 @@ namespace Zaverecny_projekt
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            balance = 500;
             label3.Text = "Balance: €" + balance.ToString();
 
             diceImages = new Image[7];
@@ -192,8 +190,24 @@ namespace Zaverecny_projekt
 
         private void AddMoney(int amount)
         {
+            BetDAO betDAO = new();
+
+            Bet bet = new Bet(DateTime.Now, amount, true, 0, Game.loggedInUser.Id);
+            Game.loggedInUser.Money += amount;
             balance += amount;
             label3.Text = "Balance: €" + balance.ToString();
+
+            betDAO.Save(bet);
+        }
+
+        private void RemoveMoney(int amount)
+        {
+            BetDAO betDAO = new();
+
+            Game.loggedInUser.Money -= amount;
+            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id);
+
+            betDAO.Save(bet);
         }
 
         public void DetermineWin()
@@ -209,7 +223,7 @@ namespace Zaverecny_projekt
             else
             {
                 MessageBox.Show("You lost! You bet on " + conditionTitle + " and you lost ");
-
+                RemoveMoney(betAmount);
             }
         }
 
@@ -232,10 +246,8 @@ namespace Zaverecny_projekt
                     {
                         if (betAmount <= balance && betAmount > 0)
                         {
-                            balance -= betAmount;
                             label3.Text = "Balance: €" + balance.ToString();
                             RollDice();
-
                         }
                         else
                         {
