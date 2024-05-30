@@ -8,6 +8,9 @@ namespace Zaverecny_projekt
 {
     internal class Bet : IBaseClass
     {
+        /// <summary>
+        /// atributes from the table bet, getters, setters, constructors and toString method
+        /// </summary>
         private int id;
         private DateTime dateOfBet;
         private int amount;

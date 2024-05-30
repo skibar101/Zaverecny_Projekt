@@ -15,6 +15,8 @@ namespace Zaverecny_projekt
         public Form5()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private void button1_Click(object sender, EventArgs e)

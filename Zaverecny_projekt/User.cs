@@ -9,6 +9,10 @@ namespace Zaverecny_projekt
 {
     internal class User : IBaseClass
     {
+        /// <summary>
+        /// atributes from the table bet, getters, setters, constructors, toString method and methods for validation
+        /// </summary>
+
         private int id;
         private string firstName;
         private string lastName;
@@ -47,6 +51,7 @@ namespace Zaverecny_projekt
             get => email;
             set
             {
+                //if statement that checks format of the email that user has wrote
                 if (!IsValidEmail(value))
                 {
                     throw new ArgumentException("Invalid email format.");
@@ -59,6 +64,7 @@ namespace Zaverecny_projekt
             get => password;
             set
             {
+                //if statement that checks strength of the password that user has wrote
                 if (!IsStrongPassword(value))
                 {
                     throw new ArgumentException("Password is not strong enough.");
@@ -73,6 +79,11 @@ namespace Zaverecny_projekt
             return $"{id}. {FirstName} {LastName}, Email: {Email}, Money: {Money}, Banned: {Ban}";
         }
 
+        /// <summary>
+        /// Function that validates an email format.
+        /// </summary>
+        /// <param name="email">The email that has to be validated.</param>
+        /// <returns>valid email</returns>
         private bool IsValidEmail(string email)
         {
             var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";

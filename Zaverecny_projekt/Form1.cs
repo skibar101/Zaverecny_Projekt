@@ -10,6 +10,8 @@ namespace Zaverecny_projekt
         public Form1()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         Random rn = new Random();

@@ -16,26 +16,26 @@ namespace Zaverecny_projekt
         {
         }
         /// <summary>
-        /// Metoda, která umožňuje připojení k db.
+        /// Method that enables connection to the database.
         /// </summary>
         public static SqlConnection GetInstance()
         {
             if (conn == null)
             {
                 SqlConnectionStringBuilder consStringBuilder = new SqlConnectionStringBuilder();
-                consStringBuilder.UserID = ReadSetting("Name");// Načtení už. jména z konfigurace.
-                consStringBuilder.Password = ReadSetting("Password");// Načtení hesla z konfigurace.
-                consStringBuilder.InitialCatalog = ReadSetting("Database");// Načtení jména db z konfigurace.
-                consStringBuilder.DataSource = ReadSetting("DataSource");// Načtení adresy z konfigurace.
-                consStringBuilder.TrustServerCertificate = true;// Bez tohoto mi nefungovalo připojení k db z důvodů důvěryhodnosti.
-                consStringBuilder.ConnectTimeout = 30;// Časpvý limit 30 sekund pro připojení.
+                consStringBuilder.UserID = ReadSetting("Name");// Load username from configuration.
+                consStringBuilder.Password = ReadSetting("Password");// Load password from configuration.
+                consStringBuilder.InitialCatalog = ReadSetting("Database"); ;// Load database name from configuration.
+                consStringBuilder.DataSource = ReadSetting("DataSource");// Load server address from configuration.
+                consStringBuilder.TrustServerCertificate = true;// Without this, the connection to the db did not work due to trust issues.
+                consStringBuilder.ConnectTimeout = 30;// Connection timeout set to 30 seconds.
                 conn = new SqlConnection(consStringBuilder.ConnectionString);
-                conn.Open(); // Otevření připojení s databází.
+                conn.Open(); // Open the connection to the database.
             }
             return conn;
         }
         /// <summary>
-        /// Uzavře připojení s databází, pokud je otevřené.
+        /// Closes the connection to the database if it is open.
         /// </summary>
         public static void CloseConnection()
         {
@@ -46,10 +46,10 @@ namespace Zaverecny_projekt
             }
         }
         /// <summary>
-        /// Načte hodnotu konfiguračního klíče.
+        /// Reads the value of a configuration key.
         /// </summary>
-        /// <param name="key">Klíč, pod kterým je uložena hodnota v konfiguračním souboru.</param>
-        /// <returns>Hodnota odpovídající zadanému klíči, nebo zpráva "Not Found", pokud klíč není nalezen.</returns>
+        /// <param name="key">The key under which the value is stored in the configuration file.</param>
+        /// <returns>The value corresponding to the specified key, or the message "Not Found" if the key is not found.</returns>
         private static string ReadSetting(string key)
         {
 

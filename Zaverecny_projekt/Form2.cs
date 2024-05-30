@@ -18,6 +18,8 @@ namespace Zaverecny_projekt
         public Form2()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         Image[] diceImages;
@@ -247,6 +249,7 @@ namespace Zaverecny_projekt
                         if (betAmount <= balance && betAmount > 0)
                         {
                             label3.Text = "Balance: €" + balance.ToString();
+                        
                             RollDice();
                         }
                         else

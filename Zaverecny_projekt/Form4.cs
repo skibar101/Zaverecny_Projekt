@@ -17,6 +17,8 @@ namespace Zaverecny_projekt
         public Form4()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
