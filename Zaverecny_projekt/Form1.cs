@@ -48,7 +48,7 @@ namespace Zaverecny_projekt
         {
             BetDAO betDAO = new(); //Acces to database
 
-            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id); //Creating object
+            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id); //Creating object of bet
             Game.loggedInUser.Money -= amount; //Updates users money
             balance -= amount; //Updates local variable
             label1.Text = "Balance: €" + balance.ToString(); //Updating the label
@@ -198,18 +198,24 @@ namespace Zaverecny_projekt
 
         }
 
-
+        // <summary>
+        /// Method that is compiling users bet
+        /// </summary>
+        //// <param name="sender"> Source of the event</param>
+        /// <param name="e"> This contains data of the event</param>
         private void button1_Click(object sender, EventArgs e)
         {
+            //Checks if text box is empty
             if (textBox1.Text == "")
             {
                 MessageBox.Show("Please place your bet");
             }
             else
             {
-
+                //Parsing the amount from the text box
                 if (int.TryParse(textBox1.Text, out int betAmount))
                 {
+                    //Checks if the bet amount is smaller or equal to users balance and bet amount is greater than 0
                     if (betAmount <= balance && betAmount > 0)
                     {
                         label1.Text = "Balance: €" + balance.ToString();
@@ -219,28 +225,34 @@ namespace Zaverecny_projekt
                     }
                     else
                     {
-                        MessageBox.Show("You don't have enough balance");
+                        MessageBox.Show("You don't have enough balance");//Displays if users bet is greater than your balance
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a valid number");
+                    MessageBox.Show("Please enter a valid number");//Displays if users bet isnt valid number
                 }
             }
         }
-
+        // <summary>
+        /// Method that is updating images of logos and check if user has won
+        /// </summary>
+        //// <param name="sender"> Source of the event</param>
+        /// <param name="e"> This contains data of the event</param>
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //If move is smaller than 30 it keeps on updating images
             move++;
             if (move < 30)
             {
+                // Generate random number for each picture box
                 a = rn.Next(4);
                 b = rn.Next(4);
                 c = rn.Next(4);
                 d = rn.Next(4);
 
-
+                //Generates 4 random images into 4 picture boxes
                 switch (a)
                 {
                     case 1:

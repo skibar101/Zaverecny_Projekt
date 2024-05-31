@@ -153,9 +153,7 @@ namespace Zaverecny_projekt
         /// </summary>
         /// <param name="email"> The email of user</param>
         /// <param name="password"> The password of user</param>
-        /// /// <returns>
-        /// User if everything is matching otherwise null</c>.
-        /// </returns>
+        ///  <returns> User if everything is matching otherwise null</returns>
         public User? GetByEmailAndPassword(string email, string password)
         {
             User? user = null;

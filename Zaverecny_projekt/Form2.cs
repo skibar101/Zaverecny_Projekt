@@ -15,13 +15,17 @@ namespace Zaverecny_projekt
 {
     public partial class Form2 : Form
     {
+
+        /// <summary>
+        /// Form for second game, dices
+        /// </summary>
         public Form2()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
         }
-
+        //Initializing variables
         Image[] diceImages;
         int[] dice;
         Random rn;
@@ -40,6 +44,7 @@ namespace Zaverecny_projekt
         {
             label3.Text = "Balance: €" + balance.ToString();
 
+            //Loading images into array
             diceImages = new Image[7];
             diceImages[0] = Properties.Resources.empty;
             diceImages[1] = Properties.Resources.dice1jecna;
@@ -53,6 +58,7 @@ namespace Zaverecny_projekt
 
             rn = new Random();
 
+            //When clicked it rolls dices and checks if bet is OK
             button1.Click += Button_Click;
             button2.Click += Button_Click;
             button3.Click += Button_Click;
@@ -63,6 +69,7 @@ namespace Zaverecny_projekt
             button8.Click += Button_Click;
             button9.Click += Button_Click;
 
+            //When clicked user wins what he bets on
             button1.Click += button1_MultiplierModifier;
             button2.Click += button2_MultiplierModifier;
             button3.Click += button3_MultiplierModifier;
@@ -189,27 +196,33 @@ namespace Zaverecny_projekt
                 return sortedDice.All(x => x == sortedDice[0]);
             };
         }
-
+        /// <summary>
+        /// Method that adds money to users balance if they win
+        /// </summary>
+        /// <param name="amount"> How much the user will gain</param>
         private void AddMoney(int amount)
         {
-            BetDAO betDAO = new();
+            BetDAO betDAO = new(); //Acces to database
 
-            Bet bet = new Bet(DateTime.Now, amount, true, 0, Game.loggedInUser.Id);
-            Game.loggedInUser.Money += amount;
-            balance += amount;
-            label3.Text = "Balance: €" + balance.ToString();
+            Bet bet = new Bet(DateTime.Now, amount, true, 0, Game.loggedInUser.Id); //Creating object of bet
+            Game.loggedInUser.Money += amount; //Updates users money
+            balance += amount; //Updates local variable
+            label3.Text = "Balance: €" + balance.ToString(); //Updates label
 
-            betDAO.Save(bet);
+            betDAO.Save(bet); //Saving to database
         }
-
+        // <summary>
+        /// Method that removes money from users balance if they lose
+        /// </summary>
+        /// <param name="amount"> How much the user will loose</param>
         private void RemoveMoney(int amount)
         {
-            BetDAO betDAO = new();
+            BetDAO betDAO = new(); //Acces to database
 
-            Game.loggedInUser.Money -= amount;
-            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id);
+            Game.loggedInUser.Money -= amount; //Updates users money
+            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id); //Creating object of bet
 
-            betDAO.Save(bet);
+            betDAO.Save(bet); //Saving to database
         }
 
         public void DetermineWin()
