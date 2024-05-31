@@ -219,8 +219,10 @@ namespace Zaverecny_projekt
         {
             BetDAO betDAO = new(); //Acces to database
 
-            Game.loggedInUser.Money -= amount; //Updates users money
             Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id); //Creating object of bet
+            Game.loggedInUser.Money -= amount; //Updates users money
+            balance -= amount; //Updates local variable
+            label3.Text = "Balance: €" + balance.ToString(); //Updating the label
 
             betDAO.Save(bet); //Saving to database
         }
