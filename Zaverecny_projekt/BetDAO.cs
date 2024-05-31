@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Zaverecny_projekt
 {
+
+    // <summary>
+    /// Class that acces data using DAO
+    /// </summary>
     internal class BetDAO : IDAO<Bet>
     {
+        /// <summary>
+        /// Deletes entity from database
+        /// </summary>
+        /// <param name="bet">Entoty that has to be deleted</param>
         public void Delete(Bet bet)
         {
             SqlConnection conn = Singleton.GetInstance();
@@ -21,6 +29,10 @@ namespace Zaverecny_projekt
             }
         }
 
+        // <summary>
+        /// Loads all entities from database
+        /// </summary>
+        /// <returns> All entities</returns>
         public IEnumerable<Bet> GetAll()
         {
             SqlConnection conn = Singleton.GetInstance();
@@ -44,7 +56,11 @@ namespace Zaverecny_projekt
                 }
             }
         }
-
+        /// <summary>
+        /// Loads entity by id
+        /// </summary>
+        /// <param name="id"> id of entity</param>
+        /// <returns> Entity or null if not found</returns>
         public Bet? GetByID(int id)
         {
             Bet? bet = null;
@@ -71,7 +87,10 @@ namespace Zaverecny_projekt
             }
             return bet;
         }
-
+        /// <summary>
+        /// Saves entity to database
+        /// </summary>
+        /// <param name="bet"> entity that has to be saved</param>
         public void Save(Bet bet)
         {
             SqlConnection conn = Singleton.GetInstance();
@@ -108,7 +127,9 @@ namespace Zaverecny_projekt
                 }
             }
         }
-
+        // <summary>
+        /// Removes all data from table
+        /// </summary>
         public void RemoveAll()
         {
             SqlConnection conn = Singleton.GetInstance();

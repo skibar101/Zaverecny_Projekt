@@ -314,7 +314,7 @@ namespace Zaverecny_projekt
                 totalValue += dieValue;
             }
             label1.Text = "Total Value: " + totalValue.ToString();
-            // MessageBox.Show(conditionTitle + "\n" + "Won? " + winCondition(dice));
+            
         }
 
 

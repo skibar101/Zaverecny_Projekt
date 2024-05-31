@@ -86,7 +86,7 @@ namespace Zaverecny_projekt
         /// <returns>valid email</returns>
         private bool IsValidEmail(string email)
         {
-            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$"; // Regex for the email validation
             return Regex.IsMatch(email, emailPattern);
         }
 

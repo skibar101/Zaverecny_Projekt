@@ -8,8 +8,17 @@ using System.Threading.Tasks;
 
 namespace Zaverecny_projekt
 {
+    // <summary>
+    /// Class that acces data using DAO
+    /// </summary>
+
     internal class UserDAO : IDAO<User>
     {
+        /// <summary>
+        /// Deletes entity from database
+        /// </summary>
+        /// <param name="user">Entity that has to be deleted</param>
+
         public void Delete(User user)
         {
             SqlConnection conn = Singleton.GetInstance();
@@ -21,6 +30,11 @@ namespace Zaverecny_projekt
                 user.Id = 0;
             }
         }
+
+        // <summary>
+        /// Loads all entities from database
+        /// </summary>
+        /// <returns> All entities</returns>
 
         public IEnumerable<User> GetAll()
         {
@@ -46,7 +60,11 @@ namespace Zaverecny_projekt
                 }
             }
         }
-
+        /// <summary>
+        /// Loads entity by id
+        /// </summary>
+        /// <param name="id"> id of entity</param>
+        /// <returns> Entity or null if not found</returns>
         public User? GetByID(int id)
         {
             User? user = null;
@@ -74,6 +92,10 @@ namespace Zaverecny_projekt
             }
             return user;
         }
+        /// <summary>
+        /// Saves entity to database
+        /// </summary>
+        /// <param name="user"> entity that has to be saved</param>
 
         public void Save(User user)
         {
@@ -113,6 +135,9 @@ namespace Zaverecny_projekt
                 }
             }
         }
+        // <summary>
+        /// Removes all data from table
+        /// </summary>
 
         public void RemoveAll()
         {
@@ -123,7 +148,14 @@ namespace Zaverecny_projekt
                 command.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        /// Retrieves a user by email and password from the table
+        /// </summary>
+        /// <param name="email"> The email of user</param>
+        /// <param name="password"> The password of user</param>
+        /// /// <returns>
+        /// User if everything is matching otherwise null</c>.
+        /// </returns>
         public User? GetByEmailAndPassword(string email, string password)
         {
             User? user = null;

@@ -12,6 +12,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Zaverecny_projekt
 {
+    /// <summary>
+    /// Signup form
+    /// </summary>
     public partial class Form4 : Form
     {
         public Form4()
@@ -42,41 +45,48 @@ namespace Zaverecny_projekt
         {
         }
 
-
+        /// <summary>
+        /// Does the register of the user
+        /// </summary>
+        /// <param name="sender"> Source of the event</param>
+        /// <param name="e"> Tjis contains data of the event</param>
         private void Register(object sender, EventArgs e)
         {
+
+            //Retrieves values from text boxes from user input
             string email = textBox1.Text;
             string password = textBox2.Text;
             string repeatPassword = textBox3.Text;
             string firstName = textBox4.Text;
             string lastName = textBox5.Text;
-            //  string birthCertificateNumber = textBox6.Text;
-
+           
+            //Controls if all fields are filled out
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) ||
                 string.IsNullOrWhiteSpace(repeatPassword) || string.IsNullOrWhiteSpace(firstName) ||
-                string.IsNullOrWhiteSpace(lastName) /*|| string.IsNullOrWhiteSpace(birthCertificateNumber)*/)
+                string.IsNullOrWhiteSpace(lastName))
             {
                 MessageBox.Show("All fields must be filled out.");
                 return;
             }
 
+            //Check if passwords matches
             if (password != repeatPassword)
             {
                 MessageBox.Show("Passwords do not match.");
                 return;
             }
 
-            UserDAO DAO = new();
+            UserDAO DAO = new();//Instance of user for acces to database
 
-            User user = new User(firstName, lastName, email, password);
+            User user = new User(firstName, lastName, email, password);//Creates new user with these attributes
 
             try
             {
-                DAO.Save(user);
+                DAO.Save(user); //Saving the user to database
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occured. Email likely already in use");
+                MessageBox.Show("An error occured. Email likely already in use"); //Error message when email is in use
                 return;
             }
             MessageBox.Show("Sucessfully registered");

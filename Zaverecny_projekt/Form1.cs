@@ -7,6 +7,9 @@ namespace Zaverecny_projekt
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// First game, slot machine.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -21,29 +24,36 @@ namespace Zaverecny_projekt
 
         private int balance = Game.loggedInUser.Money;
 
-
+        /// <summary>
+        /// Method that adds money to users balance if they win
+        /// </summary>
+        /// <param name="amount"> How much the user will gain</param>
         private void AddMoney(int amount)
         {
-            BetDAO betDAO = new();
+            BetDAO betDAO = new(); //Acces to database
 
-            Bet bet = new Bet(DateTime.Now, amount, true, 0, Game.loggedInUser.Id);
-            Game.loggedInUser.Money += amount;
-            balance += amount;
-            label1.Text = "Balance: €" + balance.ToString();
+            Bet bet = new Bet(DateTime.Now, amount, true, 0, Game.loggedInUser.Id); //Creating object
+            Game.loggedInUser.Money += amount; //Updates users monay
+            balance += amount; // Updates local variable
+            label1.Text = "Balance: €" + balance.ToString(); // Updating the label
 
-            betDAO.Save(bet);
+            betDAO.Save(bet); //Saving to database
         }
 
+        /// <summary>
+        /// Method that removes money from users balance if they lose
+        /// </summary>
+        /// <param name="amount"> How much the user will loose</param>
         private void RemoveMoney(int amount)
         {
-            BetDAO betDAO = new();
+            BetDAO betDAO = new(); //Acces to database
 
-            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id);
-            Game.loggedInUser.Money -= amount;
-            balance -= amount;
-            label1.Text = "Balance: €" + balance.ToString();
+            Bet bet = new Bet(DateTime.Now, amount, false, 0, Game.loggedInUser.Id); //Creating object
+            Game.loggedInUser.Money -= amount; //Updates users money
+            balance -= amount; //Updates local variable
+            label1.Text = "Balance: €" + balance.ToString(); //Updating the label
 
-            betDAO.Save(bet);
+            betDAO.Save(bet); //Saving to database
         }
 
         private void ChangeBet()
@@ -52,34 +62,22 @@ namespace Zaverecny_projekt
 
         }
 
+        /// <summary>
+        /// Method to check the results of the game
+        /// </summary>
         private void CheckWin()
         {
+           
+            int[] results = new int[] { a, b, c, d };  // Array for the results 
 
-            int[] results = new int[] { a, b, c, d };
-
-
+            // Counts each symbol
             int diamondCount = results.Count(x => x == 0);
             int bronzeCount = results.Count(x => x == 1);
             int silverCount = results.Count(x => x == 2);
             int goldCount = results.Count(x => x == 3);
 
-
-            /*checker for colors*/
-            /*  string result = 
-                  new string('b', bronzeCount) +
-                  new string('s', silverCount) + 
-                  new string('g', goldCount) +
-                  new string('d', diamondCount);
-
-              char[] sasda = result.ToCharArray();
-              Array.Sort(sasda);
-
-              string sorted = new string(sasda);
-
-              MessageBox.Show(sorted);*/
-
-
-            /* 4 logos- best possible outcome*/
+            // If statement for various winning combinations and update the user's balance accordingly to what they won
+            // 4 logos- best possible outcome
             if (diamondCount == 4)
             {
 
@@ -111,7 +109,7 @@ namespace Zaverecny_projekt
 
 
 
-            /* 3 logos*/
+            // 3 logos
             else if (diamondCount == 3)
             {
 
@@ -140,7 +138,7 @@ namespace Zaverecny_projekt
 
 
 
-                /*combinations*/
+                //combinations
 
             }
             else if ((diamondCount == 2))
@@ -176,7 +174,9 @@ namespace Zaverecny_projekt
 
             }
         }
-
+        /// <summary>
+        /// Initializes the users balance and updates the label
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             balance = Game.loggedInUser.Money;

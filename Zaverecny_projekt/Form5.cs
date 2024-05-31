@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Zaverecny_projekt
 {
+    /// <summary>
+    /// Start screen of the casino, where you select your games
+    /// </summary>
     public partial class Form5 : Form
     {
         public Form5()
