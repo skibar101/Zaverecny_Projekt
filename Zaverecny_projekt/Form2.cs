@@ -210,7 +210,7 @@ namespace Zaverecny_projekt
                     sortedDice[i] += i;
                 }
 
-                return sortedDice.All(x => x == sortedDice[0]); /
+                return sortedDice.All(x => x == sortedDice[0]); 
             };
         }
         /// <summary>
