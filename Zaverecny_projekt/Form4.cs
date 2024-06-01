@@ -9,19 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Text.RegularExpressions;
 
 namespace Zaverecny_projekt
 {
-    /// <summary>
-    /// Signup form
-    /// </summary>
     public partial class Form4 : Form
     {
         public Form4()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -45,22 +41,15 @@ namespace Zaverecny_projekt
         {
         }
 
-        /// <summary>
-        /// Does the register of the user
-        /// </summary>
-        /// <param name="sender"> Source of the event</param>
-        /// <param name="e"> Tjis contains data of the event</param>
+
         private void Register(object sender, EventArgs e)
         {
-
-            //Retrieves values from text boxes from user input
             string email = textBox1.Text;
             string password = textBox2.Text;
             string repeatPassword = textBox3.Text;
             string firstName = textBox4.Text;
             string lastName = textBox5.Text;
-           
-            //Controls if all fields are filled out
+
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) ||
                 string.IsNullOrWhiteSpace(repeatPassword) || string.IsNullOrWhiteSpace(firstName) ||
                 string.IsNullOrWhiteSpace(lastName))
@@ -69,31 +58,54 @@ namespace Zaverecny_projekt
                 return;
             }
 
-            //Check if passwords matches
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Invalid email format.");
+                return;
+            }
+
+            if (!IsStrongPassword(password))
+            {
+                MessageBox.Show("Password is not strong enough. It must be at least 8 characters long and include uppercase letters, lowercase letters, digits, and special characters.");
+                return;
+            }
+
             if (password != repeatPassword)
             {
                 MessageBox.Show("Passwords do not match.");
                 return;
             }
 
-            UserDAO DAO = new();//Instance of user for acces to database
+            UserDAO DAO = new();
 
-            User user = new User(firstName, lastName, email, password);//Creates new user with these attributes
+            User user = new User(firstName, lastName, email, password);
 
             try
             {
-                DAO.Save(user); //Saving the user to database
+                DAO.Save(user);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occured. Email likely already in use"); //Error message when email is in use
+                MessageBox.Show("An error occurred. Email likely already in use.");
                 return;
             }
-            MessageBox.Show("Sucessfully registered");
+            MessageBox.Show("Successfully registered");
 
             this.Hide();
             Form3 form3 = new Form3();
             form3.Show();
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+        private bool IsStrongPassword(string password)
+        {
+            var passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$";
+            return Regex.IsMatch(password, passwordPattern);
         }
 
 
@@ -107,4 +119,3 @@ namespace Zaverecny_projekt
         }
     }
 }
-

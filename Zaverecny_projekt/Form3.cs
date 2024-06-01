@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,12 +19,10 @@ namespace Zaverecny_projekt
     /// </summary>
     public partial class Form3 : Form
     {
-     
+        SqlConnection connection = Singleton.GetInstance();
         public Form3()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -53,42 +52,47 @@ namespace Zaverecny_projekt
             form4.Show();
         }
 
-        // <summary>
-        /// Method that logs user into the game by button click
-        /// </summary>
-        //// <param name="sender"> Source of the event</param>
-        /// <param name="e"> This contains data of the event</param>
-        private void button1_Click(object sender, EventArgs e)
+        private void Login(object sender, EventArgs e)
         {
-            UserDAO dao = new(); //Instance of user for acces to database
+            UserDAO dao = new();
 
-            //Retrieving values from text boxes from the user inputs
             string email = textBox1.Text;
             string pass = textBox2.Text;
+
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Invalid email format.");
+                return;
+            }
+
             textBox1.Clear();
             textBox2.Clear();
 
-            User? user = dao.GetByEmailAndPassword(email, pass); //Checks if user exist by email and password
+            User? user = dao.GetByEmailAndPassword(email, pass);
 
-            // If user is not found they cant log in
             if (user == null)
             {
                 MessageBox.Show("Failed to login");
                 return;
             }
-            // If user lost all his money, they are banned and cant play anymore
+
             if (user.Ban)
             {
-                MessageBox.Show("You are banned from betting!");
+                MessageBox.Show("You are BANNED!");
                 return;
             }
 
-           
-            MessageBox.Show("Successfully logged in"); // Displays if everything is correct
+            MessageBox.Show("Successfully logged in");
             Game.loggedInUser = user;
             this.Hide();
             Form5 form5 = new Form5();
             form5.Show();
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, emailPattern);
         }
     }
 }
