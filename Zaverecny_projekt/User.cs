@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Zaverecny_projekt
 {
+
+    /// <summary>
+    /// Class for user, getters setters, constructors and toString method
+    /// </summary>
     internal class User : IBaseClass
     {
         private int id;
