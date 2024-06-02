@@ -1,6 +1,6 @@
 # Application in C# that contains casino games in WinFroms with users database
 
-Intelligible and easy to understand user interface, allows the user to create an account, log in and then play two simple casino games. Point of the game is to make most money and have fun.
+Intelligible and easy to understand user interface, allows the user to create an account, log in and then play two simple casino games. Point of the game is to make most money and have fun. Project is written on .NET 6.0
 
 ## Structure of the database
 
